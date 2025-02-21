@@ -1,11 +1,12 @@
 package motivation.api.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import motivation.api.model.Quote;
 import motivation.api.service.QuoteService;
 
-@Controller
+@RestController
 public class QuoteController {
 	QuoteService quoteService;
 	
@@ -14,9 +15,7 @@ public class QuoteController {
 	}
 	
 	@GetMapping("/getQuote")
-	public String quote() {
-		return "quotetemplate";
+	public Quote quote() {
+		return quoteService.getQuote();
 	}
-	
-	
 }
