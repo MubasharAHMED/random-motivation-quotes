@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Liste des Utilisateurs</title>
+    <style>
+      header {
+        background-color: green;
+        padding: 10px;
+      }
+
+      h1,
+      form,
+      header {
+        text-align: center;
+      }
+
+      input,
+      button,
+      header {
+        border-radius: 10px;
+      }
+
+      ul {
+        list-style-type: none;
+      }
+
+      details {
+        margin-bottom: 10px;
+      }
+
+      summary {
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      a {
+        color: white;
+        margin: 0 15px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="/chat">Envoyer un message</a>
+      <a href="/chat/messages">Voir les utilisateurs</a>
+    </header>
+
+    <h1>Liste des utilisateurs et leurs messages</h1>
+
+    <ul>
+      <li th:each="user : ${users}">
+        <details>
+          <summary th:text="${user.username}"></summary>
+
+          <ul class="messages">
+            <li th:each="message : ${user.messages}">
+              <p>
+                <strong th:text="${message.user.username}">Username</strong>:
+                <span th:text="${message.content}"></span>
+                (<span
+                  th:text="${#temporals.format(message.date, 'dd-MM-yyyy HH:mm')}"
+                ></span
+                >)
+              </p>
+              <p th:text="${message.response}"></p>
+            </li>
+          </ul>
+        </details>
+      </li>
+    </ul>
+  </body>
+</html>

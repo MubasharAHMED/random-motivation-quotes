@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Chat</title>
+    <style>
+      header {
+        background-color: green;
+        padding: 10px;
+      }
+
+      h1,
+      form,
+      header, 
+	  .center {
+        text-align: center;
+      }
+
+      input,
+      button,
+      header {
+        border-radius: 10px;
+      }
+
+      a {
+        color: white;
+        margin: 0 15px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      form {
+        margin-top: 20px;
+      }
+
+      input[type="text"] {
+        margin: 5px;
+        padding: 10px;
+        width: 200px;
+      }
+
+      button {
+        padding: 10px 15px;
+        background-color: green;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: green;
+      }
+
+      .message-box {
+        margin-top: 20px;
+        font-size: 16px;
+      }
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="/chat">Envoyer un message</a>
+      <a href="/chat/messages">Voir les utilisateurs</a>
+    </header>
+
+    <h1>Conversation</h1>
+
+    <p class="center">
+      Partagez vos pensées et vos préoccupations ici. Notre chat est là pour
+      écouter vos malheurs et vous offrir des conseils inspirants. Entrez votre
+      nom et votre message ci-dessous pour recevoir une réponse motivante.
+    </p>
+
+    <form action="/chat/send" method="post">
+      <input type="text" name="username" placeholder="Votre nom" />
+      <input type="text" name="content" placeholder="Votre message" />
+      <button type="submit">Envoyer</button>
+    </form>
+
+    <p class="error"><strong></strong> <span th:text="${error}"></span></p>
+
+    <div th:if="${lastMessage}">
+      <div class="message-box">
+        <p>
+          <strong>Vous :</strong> <span th:text="${lastMessage.content}"></span>
+        </p>
+        <p>
+          <strong>Réponse :</strong>
+          <span th:text="${lastMessage.response}"></span>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
